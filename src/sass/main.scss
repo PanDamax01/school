@@ -1,0 +1,142 @@
+@use 'reset' as *;
+@use 'colors' as *;
+
+body {
+	font-family: 'Archivo', sans-serif;
+	font-size: 2rem;
+	background-color: var(--blue-color);
+}
+
+.wrapper {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 1200px;
+}
+
+.white {
+	background-color: var(--white-color);
+}
+
+.section-heading {
+	position: relative;
+	margin-bottom: 1em;
+	color: var(--black-color);
+	font-size: 3rem;
+	font-weight: 300;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.section-padding {
+	padding: 3em 2em;
+}
+
+.btn-special-animation {
+	position: relative;
+	font-weight: bold;
+	transition: background-color var(--time-transition);
+	overflow: hidden;
+	z-index: 0;
+	cursor: pointer;
+
+	&::before {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 120%;
+		transform: scaleX(0);
+		transform-origin: right;
+		transition: transform var(--time-transition);
+		z-index: -1;
+	}
+
+	&:hover::before {
+		transform: scaleX(1);
+		transform-origin: left;
+	}
+}
+
+// --------------- aside  SOCIALS
+.socials {
+	display: none;
+}
+
+// --------------- aside  headerTop
+.headerTop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.8em 0.4em;
+
+	&__box-logo {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.3em;
+	}
+
+	&__logo {
+		width: 50px;
+	}
+
+	&__text-logo {
+		font-size: 3rem;
+		font-weight: 600;
+	}
+
+	&__box-btn {
+		display: none;
+	}
+
+	&__btn-nav {
+		width: 80px;
+		cursor: pointer;
+
+		> .line {
+			transition: stroke-dasharray 400ms ease-in-out,
+				stroke-dashoffset 600ms ease-in-out;
+		}
+		> .line1 {
+			stroke-dasharray: 56.5, 200;
+		}
+		> .line2 {
+			stroke-dasharray: 56.5, 200;
+		}
+		> .line3 {
+			stroke-dasharray: 56.5, 200;
+		}
+	}
+}
+
+// --------------- nav
+.nav {
+	position: absolute;
+	top: 100px;
+	width: 100%;
+	height: 100%;
+	background-color: var(--white-color);
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	&__item:not(.nav__item:last-child) {
+		margin-bottom: 0.6em;
+	}
+
+	&__link {
+		padding: 0.2em;
+		color: var(--black-color);
+		font-size: 2.2rem;
+		font-weight: 400;
+		text-decoration: none;
+	}
+}
+
+@import 'small';
+@import 'medium';

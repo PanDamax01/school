@@ -1,0 +1,91 @@
+@media (min-width: 768px) {
+	.section-heading {
+		margin-bottom: 1.2em;
+		font-size: 3.6rem;
+	}
+
+	.section-padding {
+		padding: 3.4em 2em;
+	}
+
+	// --------------- aside  headerTop
+	.headerTop {
+		padding: 1em 2em;
+
+		&__logo {
+			width: 60px;
+		}
+
+		&__text-logo {
+			font-size: 3.6rem;
+		}
+
+		&__box-btn {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 0.4em;
+		}
+
+		&__btn {
+			padding: 0.4em 2em;
+			color: var(--white-color);
+			background-color: var(--blue-color);
+			border: none;
+
+			&::before {
+				background-color: var(--green-color);
+			}
+		}
+
+		&__btn-nav {
+			display: none;
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	// --------------- aside  SOCIALS
+	.socials {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 2em;
+
+		&__btn {
+			padding: 0.4em 2em;
+			background-color: var(--white-color);
+			border: none;
+			transform: skew(-20deg);
+
+			&::before {
+				background-color: var(--green-color);
+			}
+
+			&-text {
+				display: inline-block;
+				transform: skew(20deg);
+			}
+		}
+
+		&__box-icon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		&__icon {
+			width: 70px;
+
+			&--fb {
+				filter: brightness(1.5);
+			}
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	.headerTop {
+		padding: 1em;
+	}
+}
