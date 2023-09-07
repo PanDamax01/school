@@ -17,6 +17,9 @@ body {
 	background-color: var(--white-color);
 }
 
+.white.main {
+	transform: translateY(-60px);
+}
 // to delete jak nie uzyje
 .section-heading {
 	position: relative;
@@ -29,7 +32,7 @@ body {
 }
 
 .section-padding {
-	padding: 3em 2em;
+	padding: 0 2em;
 }
 
 .btn-special-animation {
@@ -130,16 +133,15 @@ body {
 
 // --------------- nav
 .nav {
-    display: none;        // dodac flex
-	position: absolute;
+	position: fixed;
 	top: 80px;
-	// display: flex;
+	display: flex;
 	justify-content: center;
 	padding-top: 3em;
 	width: 100%;
 	height: 100%;
 	background-color: var(--white-color);
-	transform: translateX(110%);
+	transform: translateX(100%);
 	transition: transform 0.6s;
 	box-shadow: 0px 0px 8px 2px var(--shadow-color);
 	overflow: scroll;
@@ -229,13 +231,14 @@ body {
 	background-size: cover;
 	background-position: center;
 	transform: translateY(-60px);
+	transition: background-image 1s;
 	text-align: center;
 	z-index: 0;
 
 	&::before {
 		content: '';
 		position: absolute;
-        top: 0;
+		top: 0;
 		width: 100%;
 		height: 100%;
 		background-color: var(--shadow-color);
@@ -249,6 +252,164 @@ body {
 	&__text,
 	&__btn {
 		display: none;
+	}
+}
+
+// --------------- featured
+.featured {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 0 3em;
+	transform: translateY(-150px);
+	height: auto;
+
+	&__card {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		padding: 2em 1.8em 1em;
+		margin: 1em 0;
+		width: 100%;
+		max-width: 175px;
+		background-color: var(--green-color);
+		text-decoration: none;
+		transition: box-shadow var(--time-transition);
+		box-shadow: 1px 1px 4px 0px var(--shadow-color);
+		cursor: pointer;
+
+		&:hover {
+			box-shadow: inset 0 -3px 14px 0 var(--white-color);
+		}
+	}
+
+	&__text {
+		color: var(--white-color);
+		font-weight: 600;
+		font-size: 2.6rem;
+		text-shadow: 1px 1px 1px var(--shadow-color);
+	}
+}
+
+// --------------- news
+.news {
+	transform: translateY(-130px);
+
+	&__headline {
+		position: relative;
+		margin-bottom: 1.2em;
+		font-size: 3rem;
+		text-align: center;
+
+		&::before {
+			content: '';
+			position: absolute;
+			bottom: -15px;
+			left: 50%;
+			width: 20px;
+			height: 20px;
+			background-color: var(--gray-color);
+			border: 5px solid var(--white-color);
+			transform: translateX(-50%);
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: -6px;
+			left: 50%;
+			width: 150px;
+			height: 1px;
+			background-color: var(--blue-color);
+			transform: translateX(-50%);
+			z-index: -1;
+		}
+	}
+
+	&__list {
+		gap: 3em;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	&__card {
+		display: flex;
+		flex-direction: column;
+		max-width: 300px;
+		border-bottom: 5px solid var(--blue-color);
+		box-shadow: 0 1px 1px 0 var(--shadow-color);
+		text-align: center;
+	}
+
+	&__head {
+		display: block;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	&__img {
+		object-fit: cover;
+		transition: transform var(--time-transition);
+
+		&:hover {
+			transform: scale(1.2);
+		}
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		padding: 0.8em 1em 1.2em;
+		height: 100%;
+	}
+
+	&__title {
+		position: relative;
+		font-size: 1.8rem;
+		margin-bottom: 0.8em;
+
+		&::before {
+			content: '';
+			position: absolute;
+			bottom: -4px;
+			left: 50%;
+			transform: translateX(-50%);
+			height: 2px;
+			width: 50px;
+			background-color: var(--blue-color);
+		}
+
+		&:hover {
+			color: var(--blue-color);
+		}
+	}
+
+	&__text {
+		display: block;
+		font-size: 1.6rem;
+		line-height: 1.8rem;
+		margin-bottom: 1.4em;
+		color: var(--gray-color);
+	}
+
+	&__link {
+		align-self: center;
+		display: block;
+		padding: 0.2em;
+		margin-top: auto;
+		width: 110px;
+		color: var(--white-color);
+		background-color: var(--blue-color);
+		font-weight: 400;
+		text-decoration: none;
+
+		&::before {
+			background-color: var(--green-color);
+		}
 	}
 }
 
@@ -277,6 +438,9 @@ body {
 }
 
 .nav-active {
-    display: flex;
-	transform: translateX(0); //zrobic jako animacje na poczzatku display flex pozniej transform
+	transform: translateX(0);
+}
+
+.hidden {
+	overflow: hidden;
 }

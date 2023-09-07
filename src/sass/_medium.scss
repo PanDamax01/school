@@ -5,7 +5,7 @@
 	}
 
 	.section-padding {
-		padding: 3.4em 2em;
+		padding: 0 3.4em 2em;
 	}
 
 	// --------------- aside  headerTop
@@ -46,6 +46,7 @@
 
 	// --------------- nav
 	.nav {
+		display: flex;
 		position: relative;
 		top: -10px;
 		max-width: 860px;
@@ -104,27 +105,52 @@
 		&__btn {
 			display: block;
 			position: absolute;
-            left: 0;
-            top: 50%;
-            height: 110px;
-            width: 33px;
-            color: inherit;
-            background-color: var(--blue-color);
-            border: none;
-            font-weight: 600;
-            transition: opacity var(--time-transition);
-            transform: translateY(-50%);
-            z-index: 2;
-            opacity: .5;
-            cursor: pointer;
+			left: 0;
+			top: 50%;
+			height: 110px;
+			width: 33px;
+			color: inherit;
+			background-color: var(--blue-color);
+			border: none;
+			font-weight: 600;
+			transition: opacity var(--time-transition);
+			transform: translateY(-50%);
+			z-index: 2;
+			opacity: 0.5;
+			cursor: pointer;
 
-            &:hover{
-                opacity: 1;
-            }
+			&:hover {
+				opacity: 1;
+			}
 
-            &--right{
-                left: calc(100% - 33px);
-            }
+			&--right {
+				left: calc(100% - 33px);
+			}
+		}
+	}
+
+	// --------------- featured
+	.featured {
+		&__card {
+			margin: 0 1em;
+			max-width: 200px;
+		}
+	}
+
+	// --------------- news
+	.news {
+		transform: translateY(-110px);
+
+		&__card {
+			max-width: 350px;
+		}
+
+		&__title {
+			font-size: 2.2rem;
+		}
+
+		&__text {
+			font-size: 1.8rem;
 		}
 	}
 }

@@ -1,8 +1,4 @@
 @media (max-width: 768px) {
-	body{
-		overflow: hidden;
-	}
-
 	.nav {
 		&__item:last-child > .nav__link:not(.nav__dropdown .nav__item:last-child > .nav__link) {
 			color: var(--white-color);
