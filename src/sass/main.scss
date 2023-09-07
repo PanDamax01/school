@@ -17,6 +17,7 @@ body {
 	background-color: var(--white-color);
 }
 
+// to delete jak nie uzyje
 .section-heading {
 	position: relative;
 	margin-bottom: 1em;
@@ -66,10 +67,25 @@ body {
 
 // --------------- aside  headerTop
 .headerTop {
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 0.8em 0.4em;
+	background-color: var(--white-color);
+	z-index: 2;
+
+	&::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: var(--white-color);
+		box-shadow: 1px 1px 10px 2px var(--shadow-color);
+		z-index: -1;
+	}
 
 	&__box-logo {
 		display: flex;
@@ -94,6 +110,7 @@ body {
 	&__btn-nav {
 		width: 80px;
 		cursor: pointer;
+		z-index: 2;
 
 		> .line {
 			transition: stroke-dasharray 400ms ease-in-out,
@@ -113,30 +130,153 @@ body {
 
 // --------------- nav
 .nav {
+    display: none;        // dodac flex
 	position: absolute;
-	top: 100px;
+	top: 80px;
+	// display: flex;
+	justify-content: center;
+	padding-top: 3em;
 	width: 100%;
 	height: 100%;
 	background-color: var(--white-color);
+	transform: translateX(110%);
+	transition: transform 0.6s;
+	box-shadow: 0px 0px 8px 2px var(--shadow-color);
+	overflow: scroll;
+	z-index: 1;
 
 	&__list {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-	}
-
-	&__item:not(.nav__item:last-child) {
-		margin-bottom: 0.6em;
+		align-items: stretch;
 	}
 
 	&__link {
-		padding: 0.2em;
+		display: block;
+		position: relative;
+		padding: 0.6em 1.2em;
+		margin: 0.2em 0;
 		color: var(--black-color);
-		font-size: 2.2rem;
+		font-size: 2.4rem;
 		font-weight: 400;
 		text-decoration: none;
+		transition: border-left var(--time-transition);
+		cursor: pointer;
+		user-select: none;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 3px;
+			height: 100%;
+			transform: scaleY(0);
+			background-color: var(--blue-color);
+			transition: transform var(--time-transition);
+		}
+
+		&:hover::before {
+			transform: scaleY(1);
+		}
+	}
+
+	&__dropdown {
+		position: absolute;
+
+		li {
+			display: none;
+			background-color: var(--white-color);
+			opacity: 0;
+
+			& > a {
+				margin: 0;
+			}
+		}
+	}
+
+	&__item:hover .nav__dropdown {
+		position: relative;
+
+		li {
+			display: block;
+			animation: dropdown-animation 0.5s forwards;
+
+			&:nth-child(2) {
+				animation-delay: 0.2s;
+			}
+			&:nth-child(3) {
+				animation-delay: 0.4s;
+			}
+			&:nth-child(4) {
+				animation-delay: 0.6s;
+			}
+		}
+	}
+}
+
+// --------------- header
+.header {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 500px;
+	color: var(--white-color);
+	background-image: url('../img/header1-small.jpg');
+	background-size: cover;
+	background-position: center;
+	transform: translateY(-60px);
+	text-align: center;
+	z-index: 0;
+
+	&::before {
+		content: '';
+		position: absolute;
+        top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: var(--shadow-color);
+		z-index: -1;
+	}
+
+	&__headline {
+		font-weight: 600;
+	}
+
+	&__text,
+	&__btn {
+		display: none;
 	}
 }
 
 @import 'small';
 @import 'medium';
+
+@keyframes dropdown-animation {
+	0% {
+		opacity: 0;
+		transform: rotate(36deg);
+	}
+	100% {
+		opacity: 1;
+		transform: rotate(0);
+	}
+}
+
+////  ----- interaction
+.draw-line {
+	stroke-dasharray: 100, 200 !important;
+	stroke-dashoffset: -121;
+}
+
+.submitted-line {
+	stroke-dashoffset: 57;
+}
+
+.nav-active {
+    display: flex;
+	transform: translateX(0); //zrobic jako animacje na poczzatku display flex pozniej transform
+}

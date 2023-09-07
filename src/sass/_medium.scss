@@ -10,7 +10,12 @@
 
 	// --------------- aside  headerTop
 	.headerTop {
-		padding: 1em 2em;
+		padding: 1.2em 2em;
+
+		&::before,
+		&__btn-nav {
+			display: none;
+		}
 
 		&__logo {
 			width: 60px;
@@ -37,9 +42,89 @@
 				background-color: var(--green-color);
 			}
 		}
+	}
 
-		&__btn-nav {
-			display: none;
+	// --------------- nav
+	.nav {
+		position: relative;
+		top: -10px;
+		max-width: 860px;
+		margin: 0 auto;
+		padding-top: 0;
+		padding-bottom: 0.2em;
+		transform: translate(0);
+		overflow: visible;
+
+		&__list {
+			flex-direction: row;
+		}
+
+		&__link {
+			padding: 0.2em 0.6em;
+
+			&--none {
+				display: none;
+			}
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 90%;
+				left: 0;
+				width: 100%;
+				height: 3px;
+				transform: scaleX(0);
+				background-color: var(--blue-color);
+				transition: transform var(--time-transition);
+			}
+
+			&:hover::before {
+				transform: scaleX(1);
+			}
+		}
+
+		&__item:hover .nav__dropdown {
+			position: absolute;
+		}
+	}
+
+	// --------------- header
+	.header {
+		background-image: url('../img/header1-big.jpg');
+
+		&__headline {
+			font-size: 5rem;
+		}
+
+		&__text {
+			display: block;
+			margin-top: 0.2em;
+		}
+
+		&__btn {
+			display: block;
+			position: absolute;
+            left: 0;
+            top: 50%;
+            height: 110px;
+            width: 33px;
+            color: inherit;
+            background-color: var(--blue-color);
+            border: none;
+            font-weight: 600;
+            transition: opacity var(--time-transition);
+            transform: translateY(-50%);
+            z-index: 2;
+            opacity: .5;
+            cursor: pointer;
+
+            &:hover{
+                opacity: 1;
+            }
+
+            &--right{
+                left: calc(100% - 33px);
+            }
 		}
 	}
 }
@@ -82,10 +167,38 @@
 			}
 		}
 	}
-}
 
-@media (min-width: 1200px) {
-	.headerTop {
-		padding: 1em;
+	// --------------- nav
+	.nav {
+		&__list {
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				width: 66px;
+				height: 80px;
+				background-color: var(--white-color);
+			}
+
+			&::before {
+				top: -42px;
+				left: -31px;
+				transform: rotate(-38deg);
+				box-shadow: 3px -28px 12px 3px var(--shadow-color);
+			}
+
+			&::after {
+				top: -42px;
+				right: -31px;
+				transform: rotate(38deg);
+				box-shadow: 7px -3px 10px -7px var(--shadow-color);
+			}
+		}
 	}
 }
+
+// @media (min-width: 1200px) {
+// 	.headerTop {
+// 		padding: 1.4em 1em;
+// 	}
+// }
