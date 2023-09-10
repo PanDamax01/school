@@ -203,6 +203,14 @@
 			}
 		}
 	}
+
+	// --------------- accessible-tabs
+	.accessible-tools {
+		&__img {
+			right: -60px;
+			width: 60px;
+		}
+	}
 }
 
 @media (min-width: 992px) {
