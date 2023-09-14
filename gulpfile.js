@@ -38,7 +38,8 @@ function sassCompiler(done) {
 function javaScript(done) {
 	src(paths.js)
 		.pipe(sourcemaps.init())
-		.pipe(babel({ presets: ['@babel/env'] }))
+		.pipe(babel())
+		// .pipe(babel({ presets: ['@babel/env'] }))
 		.pipe(uglify())
 		.pipe(rename({ suffix: '.min' }))
 		.pipe(sourcemaps.write())
