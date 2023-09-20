@@ -211,6 +211,27 @@
 			width: 60px;
 		}
 	}
+
+	// --------------- about-scholl
+	.about-scholl {
+		padding-top: 4.2em;
+	}
+
+	.white.section {
+		&::after,
+		&::before {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			width: calc(80% - 860px);
+			box-shadow: 0.1rem 0.1rem 1rem 0.1rem var(--shadow-color);
+			z-index: -1;
+		}
+
+		&::before {
+			right: 0;
+		}
+	}
 }
 
 @media (min-width: 992px) {
@@ -282,6 +303,38 @@
 				box-shadow: 7px -3px 10px -7px var(--shadow-color);
 			}
 		}
+	}
+
+	// --------------- about-scholl
+	.about-scholl {
+		&__container {
+			gap: 3em;
+		}
+	}
+
+	// --------------- staff-scholl
+	.staff-school {
+		&__carousel {
+			grid-auto-columns: calc((100% / 3) - 22px);
+		}
+
+		&__btn {
+			left: 68px;
+			width: 60px;
+			height: 60px;
+
+			&--right {
+				left: calc(100% - 68px);
+			}
+		}
+	}
+
+	// --------------- libray
+	.library {
+		margin-top: 1em;
+
+		&__cell {
+		padding: 0.4em 1em; }
 	}
 }
 

@@ -1,12 +1,12 @@
 import { accessibleTools } from './accessible.min.js'
 
-let spanYear, contactEmail, burgerLines, burgerLine2, burgerNav, nav, body, headlineHeader, header, headerBtnLeft , headerBtnRight, accessibleIcon, asideAccessible, navItem, accessibleLi
-let slide = 1, isClick = false, timeNextSlide = 9_000
+let spanYear, contactEmail, burgerLines, burgerLine2, burgerNav, nav, body, headlineHeader, header, headerBtnLeft , headerBtnRight, accessibleIcon, asideAccessible, navItem, accessibleLi, staffSchool, carousel, arrowBtns, firstCardWidth, carouselChildrens, cardPerView
+let slide = 1, isClick = false, timeNextSlide = 9_000, isDragging = false, startX, startScrollLeft, timeoutId
 const motivationText = ['Zmień swoje marzenia w rzeczywistość', 'Twój sukces jest naszą misją', 'Zapraszamy do szkoły']
 
 const main = () => {
 	prepareDOMElements()
-	onStart()
+	// getYear()
 	prepareDOMEvents()
 }
 
@@ -26,13 +26,19 @@ const prepareDOMElements = () => {
 	accessibleIcon = body.querySelector('.accessible-tools__img')
 	asideAccessible = body.querySelector('.accessible-tools')
 	accessibleLi = body.querySelectorAll('.accessible-tools__item')
+	if (body.classList.contains('school')){
+	staffSchool = body.querySelector('.staff-school')
+	carousel = body.querySelector('.staff-school__carousel')
+	arrowBtns = body.querySelectorAll('.staff-school__btn')
+	firstCardWidth = carousel.querySelector('.staff-school__card').offsetWidth
+	carouselChildrens = [...carousel.children]
+	cardPerView = Math.round(carousel.offsetWidth / firstCardWidth)
+	}
 }
 
-const onStart = () => {
+const getYear = () => {
 	const year = new Date().getFullYear()
 	spanYear.textContent = year
-
-	body.offsetWidth > 350?(contactEmail.textContent = 'support@sparklewpthemes.com'):null
 }
 
 const changeNav = () => {
@@ -75,16 +81,85 @@ const changeAsideDisabled = () => {
 	asideAccessible.classList.toggle('active')
 }
 
+// ----------- slider
+
+const sliceSlider = () => {
+	carouselChildrens.slice(-cardPerView).reverse().forEach(card =>{
+		carousel.insertAdjacentHTML('afterbegin', card.outerHTML)
+	})
+	
+	carouselChildrens.slice(0, cardPerView).forEach(card =>{
+		carousel.insertAdjacentHTML('beforeend', card.outerHTML)
+	})
+}
+
+const dragStart = e => {
+	isDragging = true
+	carousel.classList.add('dragging')
+	startX = e.pageX
+	startScrollLeft = carousel.scrollLeft
+}
+
+const dragging = e => {
+	if(!isDragging) return
+	carousel.scrollLeft = startScrollLeft - (e.pageX - startX)
+
+}
+
+const dragStop = () => {
+	isDragging = false
+	carousel.classList.remove('dragging')
+}
+
+const autoPlay = () => {
+	if (window.innerWidth < 800) return
+	timeoutId = setTimeout(() => carousel.scrollLeft += firstCardWidth, 5000)
+}
+
+const infiniteScroll = () => {
+	if (carousel.scrollLeft === 0) {
+		carousel.classList.add('no-transition')
+		carousel.scrollLeft = carousel.scrollWidth - (2 * carousel.offsetWidt)
+		carousel.classList.remove('no-transition')
+	}else if (Math.ceil(carousel.scrollLeft) === carousel.scrollWidth - carousel.offsetWidth) {
+		carousel.classList.add('no-transition')
+		carousel.scrollLeft = carousel.offsetWidth
+		carousel.classList.remove('no-transition')
+	}
+
+	clearTimeout(timeoutId)
+	if (!staffSchool.matches(':hover')) autoPlay()
+}
+
 const prepareDOMEvents = () => {
 	burgerNav.addEventListener('click', changeNav)
 	navItem.forEach(li => li.addEventListener('click', changeNav))
-	headerBtnRight.addEventListener('click', changeNumber)
-	headerBtnLeft.addEventListener('click', changeNumber)
-	accessibleIcon.addEventListener('click', changeAsideDisabled)
-	accessibleLi.forEach(li => li.addEventListener('click', accessibleTools))
+	// accessibleIcon.addEventListener('click', changeAsideDisabled)
+	// accessibleLi.forEach(li => li.addEventListener('click', accessibleTools))
 	
+	if (body.classList.contains('main-body')) {
+		headerBtnRight.addEventListener('click', changeNumber)
+		headerBtnLeft.addEventListener('click', changeNumber)
+		setInterval(autoChangeSlide, timeNextSlide)
+		body.offsetWidth > 350?(contactEmail.textContent = 'support@sparklewpthemes.com'):null
+	} else if (body.classList.contains('school')){
+		carousel.addEventListener('mousedown', dragStart)
+		carousel.addEventListener('mousemove', dragging)
+		document.addEventListener('mouseup', dragStop)
+		carousel.addEventListener('scroll', infiniteScroll)
+		staffSchool.addEventListener('mouseenter', () => clearTimeout(timeoutId))
+		staffSchool.addEventListener('mouseleave', autoPlay)
 
-	setInterval(autoChangeSlide, timeNextSlide)
+		arrowBtns.forEach(btn =>{
+			btn.addEventListener('click', () => {
+				carousel.scrollLeft += btn.id === 'left' ? -firstCardWidth : firstCardWidth
+			})
+		})
+		sliceSlider()
+		autoPlay()
+	}
 }
 
 document.addEventListener('DOMContentLoaded', main)
+
+

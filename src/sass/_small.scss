@@ -1,6 +1,7 @@
 @media (max-width: 768px) {
 	.nav {
-		&__item:last-child > .nav__link:not(.nav__dropdown .nav__item:last-child > .nav__link) {
+		&__item:last-child
+			> .nav__link:not(.nav__dropdown .nav__item:last-child > .nav__link) {
 			color: var(--white-color);
 			background-color: var(--blue-color);
 		}
@@ -15,10 +16,26 @@
 
 @media (min-width: 330px) {
 	.info {
-		&__card{
-			&::before{
+		&__card {
+			&::before {
 				bottom: -60px;
 			}
+		}
+	}
+
+	.staff-school{
+		&__carousel{
+			&__card{
+				height: 342px; 
+			}
+		}
+	}
+}
+
+@media (min-width: 592px) {
+	.staff-school {
+		&__carousel {
+			grid-auto-columns: calc((100% / 2) - 18px);
 		}
 	}
 }
