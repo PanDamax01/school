@@ -57,6 +57,7 @@
 
 		&__link {
 			padding: 0.2em 0.6em;
+			font-size: var(--fontsize--twenty-two);
 
 			&--none {
 				display: none;
@@ -215,6 +216,14 @@
 	// --------------- about-scholl
 	.about-scholl {
 		padding-top: 4.2em;
+
+		&__img {
+			max-width: 400px;
+		}
+
+		&__text {
+			text-align: left;
+		}
 	}
 
 	.white.section {
@@ -230,6 +239,18 @@
 
 		&::before {
 			right: 0;
+		}
+	}
+
+	// --------------- boarding-school
+	.boarding-school {
+		&__galery {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		&__img {
+			max-width: 300px;
+			height: 200px;
 		}
 	}
 }
@@ -334,7 +355,22 @@
 		margin-top: 1em;
 
 		&__cell {
-		padding: 0.4em 1em; }
+			padding: 0.4em 1em;
+		}
+	}
+
+	// --------------- boarding-school
+	.boarding-school {
+		&__title {
+			margin-top: 2em;
+		}
+	}
+
+	// --------------- school-statut
+	.school-statut {
+		&__pdf {
+			width: 80%;
+		}
 	}
 }
 
@@ -346,5 +382,17 @@
 
 	.adds {
 		margin-bottom: 5em;
+	}
+
+	// --------------- boarding-school
+	.boarding-school {
+		&__title {
+			margin-top: 2em;
+		}
+
+		&__galery {
+			padding: 2em;
+			grid-template-columns: 1fr 1fr 1fr;
+		}
 	}
 }

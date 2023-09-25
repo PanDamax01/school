@@ -161,5 +161,3 @@ const prepareDOMEvents = () => {
 }
 
 document.addEventListener('DOMContentLoaded', main)
-
-
